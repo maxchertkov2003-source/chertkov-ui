@@ -1,0 +1,1650 @@
+/**
+ * Оптимизированные стили для портфолио
+ * Улучшена структура и производительность
+ */
+
+// Загрузка шрифтов с оптимизацией
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../SF Pro Display/SFProDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; // Оптимизация загрузки шрифтов
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../SF Pro Display/SFProDisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../SF Pro Display/SFProDisplay-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../SF Pro Display/SFProDisplay-Bold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$color-main__dark: #333333; // Основной акцентный цвет
+$color-main__grey: #6B6B6B; // Основной серый цвет
+$color-main__white: #ffffff; // Основной белый цвет
+$color-main-background: #F5F5F5; // Цвет для всего фона страницы
+$color-container__bg: #FCFCFC; // Цвет для заливки контентного контейнера
+$color-miscs__main: #E9E9E9; // Цвет для эффектов в контейнере
+$color-badgeSmall__main: #EEEEEE; // Малый бейдж основной цвет
+$color-badgeSmall__border: #F1F1F1; // Малый бейдж, цвет обводки
+$color-btn__main: #2D2D2D; // Заливка primary кнопки
+$color-btn__border: #4B4B4B; // Цвет обводки для primary кнопки
+$color-green: #00B92D; // Цвет успеха, основной зеленый
+
+
+// Стиль для текста первого уровня 
+%text-header_h1{
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  line-height: 76px;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-align: center;
+
+  @media screen and (max-width: 768px){
+    font-size: clamp(28px, 8vw, 32px);
+    line-height: clamp(34px, 9vw, 38px);
+    letter-spacing: -1.8px;
+  }
+}
+
+// Стиль для текста второго уровня 
+%text-header_h2{
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 34px;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-align: center;
+
+  @media screen and (max-width: 768px){
+    font-size: clamp(18px, 5vw, 20px);
+    line-height: clamp(22px, 6vw, 24px);
+    letter-spacing: -0.4px;
+  }
+}
+
+// Стиль для обычного жирного текста 
+%text-main__medium{
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  line-height: 22px;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  @media screen and (max-width: 768px){
+    font-size: clamp(11px, 3vw, 12px);
+    line-height: clamp(15px, 4vw, 17px);
+    letter-spacing: -0.2px;
+  }
+}
+
+// Стиль для обычного текста 
+%text-main__regular{
+  @extend %text-main__medium;
+  font-weight: 400;
+}
+
+// Текст для кнопок
+%text-button{
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+}
+
+// Текст внутри большого бейджа
+%text-badge__big{
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+  font-weight: 500;
+  color: mix($color-main__white, $color-main__dark, 10%);
+
+  @media screen and (max-width: 768px){
+    font-size: clamp(11px, 3vw, 12px);
+    letter-spacing: -0.4px;
+  }
+}
+
+// Текст в маленьких бейджиках
+%text-badge_small{
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  letter-spacing: -0.12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: $color-main__dark;
+}
+
+
+// Другие значения для элементов
+
+%image-styles__full-container{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  // Оптимизация производительности
+  will-change: transform;
+  transform: translateZ(0); // Аппаратное ускорение
+}
+
+$corner-radius__large: 24px; // Скругления для карточек
+$corner-radius__default: 16px; // Скругления для контентных блоков
+
+%button-styles{
+  @extend %text-button;
+  color: $color-main__white;
+  padding: 16px 20px;
+  border-radius: 4000px;
+  border: 1px solid $color-btn__border;
+  background-color: $color-btn__main;
+  cursor: pointer;
+
+  &:hover{
+    color: $color-main__dark;
+    background-color: $color-badgeSmall__main;
+    border: 1px solid $color-badgeSmall__border;
+    transition: 0.4s;
+  }
+}
+
+%flex-horizontal__center{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Общий отступ между блоками на главной
+%ident-main__blocks{
+  margin-top: 220px;
+
+  @media screen and (max-width: 768px){
+    margin-top: clamp(80px, 15vw, 112px);
+  }
+}
+
+
+.user-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+} 
+
+*, *::before, *::after {
+  box-sizing: border-box; // Border и padding теперь внутри ширины/высоты
+}
+
+body{
+  min-height: 100vh;
+  max-width: 100%;
+  display: flex;
+  place-items: center;
+  flex-direction: column;
+  background-color: $color-main-background;
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  // Оптимизация рендеринга
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+  @extend %button-styles;
+}
+
+.br-mobile{
+  display: none;
+
+  @media screen and (max-width: 768px){
+    display: block;
+  }
+}
+
+.br-desctop{
+  display: block;
+
+  @media screen and (max-width: 768px){
+    display: none;
+  }
+}
+
+.text-secondary{
+  color: $color-main__grey;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hd-scr {
+  background-color: $color-container__bg;
+  border-radius: 16px;
+  margin-top: 12px;
+  padding: 0px 28px 0px 32px;
+  box-shadow: 0 0px 24px rgba(51, 51, 51, .08);
+  min-height: 90px;
+  border: 2px solid $color-main__white;
+
+  &:hover{
+    background-color: $color-main__white;
+  }
+}
+.hide{
+  opacity: 0;
+  pointer-events: none;
+}
+.header {
+  width: 1240px;
+  max-width: 100%;
+  height: 80px;
+  @extend %flex-horizontal__center;
+  position: fixed;
+  z-index: 100;
+  transition: background-color 0.3s ease, border-radius 0.3s ease, margin-top 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease, border 0.01s ease, opacity 0.5s ease;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 64px;
+  }
+  li {
+    a {
+      text-decoration: none;
+      color: $color-main__grey;
+      @extend %text-main__regular;
+
+      &:hover{
+        color: $color-main__dark;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+
+  .header__logo{
+    @extend %image-styles__full-container;
+    height: 34px;
+    width: 92px;
+    background-image: url('../images/logos/logotype.png');
+    cursor: pointer;
+
+    &:hover{
+      background-image: url('../images/logos/logotype-hover.png');
+    }
+  }
+
+  .header__button{
+    @extend %button-styles;
+  }
+
+  @media screen and (max-width: 768px){
+    display: none;
+  }
+}
+
+
+// Стили для хедера на мобилке
+
+.header-mobile__logo{
+  @extend %image-styles__full-container;
+  height: 34px;
+  width: 92px;
+  background-image: url('../images/logos/logotype-hover.png');
+  display: none;
+  margin-top: 24px;
+
+  @media screen and (max-width: 768px){
+    display: inline;
+  }
+}
+
+.header-mobile{
+  background-color: $color-container__bg;
+  border: 2px solid $color-main__white;
+  height: 80px;
+  width: calc(100% - 32px);
+  max-width: 100%;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  position: fixed;
+  z-index: 100;
+  box-shadow: 0 0px 24px rgba(51, 51, 51, .08);
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: none;
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  li {
+    a {
+      text-decoration: none;
+      color: $color-main__grey;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    display: inline;
+    padding: 28px 24px;
+  }
+  
+  @media screen and (max-width: 480px){
+    ul {
+      gap: clamp(12px, 3vw, 18px);
+    }
+    li a {
+      font-size: clamp(14px, 3.5vw, 16px);
+    }
+  }
+  
+  @media screen and (max-width: 360px){
+    ul {
+      gap: clamp(8px, 2vw, 12px);
+    }
+    li a {
+      font-size: clamp(12px, 3vw, 14px);
+    }
+  }
+}
+
+
+// Первый экран
+
+.super-case{
+  width: 1240px;
+  max-width: 100%;
+  margin-top: 180px;
+  
+  @media screen and (max-width: 768px){
+    width: 100%;
+    padding: 0 16px;
+    margin-top: clamp(60px, 12vw, 84px);
+  }
+
+  &__h1{
+    @extend %text-header_h1;
+    color: $color-main__dark;
+    overflow-x: hidden;
+  }
+
+  &__badges{
+    @extend %flex-horizontal__center;
+    gap: 4px;
+    justify-content: center;
+
+    .badges__big-badge{
+      background-color: $color-main__white;
+      border: 1px solid $color-badgeSmall__border;
+      padding: 12px 16px;
+      @extend %text-badge__big;
+      border-radius: 40000px;
+      margin-top: 32px;
+
+      @media screen and (max-width: 768px){
+        margin-top: clamp(20px, 5vw, 24px);
+      }
+    }
+  }
+
+    &__container{
+      width: 1240px;
+      height: 707px;
+      background-color: $color-container__bg;
+      border: 3px solid $color-main__white;
+      border-radius: $corner-radius__default;
+      margin-top: 80px;
+      transition: background-color 1.2s ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      @extend %image-styles__full-container;
+      
+      &:hover{
+        background-color: $color-main__white;
+      }
+
+      @media screen and (max-width: 768px){
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        min-height: 300px;
+        margin-top: clamp(32px, 8vw, 44px);
+        background-image: url('../images/casesObjects/mobile-fmcg-case__image.png');
+      }
+    }
+
+}
+
+
+.cases{
+  max-width: 100%;
+  width: 1240px;
+  @extend %ident-main__blocks;
+  
+  @media screen and (max-width: 768px){
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  &__header-block{
+    width: 1240px;
+    max-width: 100%;
+
+    .cases__title{
+      @extend %text-header_h1;
+      color: $color-main__dark;
+      text-align: left;
+    }
+    .cases-subtitle{
+      display: flex;
+      @extend %flex-horizontal__center;
+      gap: 6px;
+      justify-content: flex-start;
+      margin-top: 24px;
+
+      &__item{
+        @extend %text-main__regular;
+        color: $color-main__dark;
+      }
+
+      @media screen and (max-width: 768px){
+        margin-bottom: clamp(32px, 8vw, 44px);
+        margin-top: clamp(12px, 3vw, 16px);
+      }
+    }
+    @media screen and (max-width: 768px){
+      width: 100%;
+      max-width: 100%;
+      padding: 0 16px;
+      margin: 0 auto;
+    }
+  }
+
+  .cases-effect__linear{
+    width: 1240px;
+    max-width: 1240px;
+    background: linear-gradient(to bottom, rgba(245, 245, 245, 0) 0%, rgba(245, 245, 245, 1) 94%);
+    height: 460px;
+    position: relative;
+    z-index: -1;
+    //border: 4px solid red;
+
+    @media screen and (max-width: 768px){
+      display: none;
+    }
+  }
+  .cases-effect__bgText{
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    letter-spacing: -16px;
+    color: #E9E9E9;
+    font-size: 490px;
+    margin-top: -500px;
+    position: relative;
+    z-index: -2;
+    margin-bottom: -200px;
+    // Оптимизация производительности для больших текстов
+    will-change: transform;
+    transform: translateZ(0);
+
+    @media screen and (max-width: 768px){
+      display: none;
+    }
+  }
+
+  .cases-body{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &__line{
+      @extend %flex-horizontal__center;
+
+      .cases-body__case-big{
+        width: 820px;
+        height: 482px;
+        background-color: $color-container__bg;
+        border: 3px solid $color-main__white;
+        border-radius: $corner-radius__default;
+        overflow: hidden;
+        position: relative;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+
+        &:hover{
+          background-color: $color-main__white;
+
+          .case-big__image-container {
+            transform: translateY(-20px); /* Пример: сдвиг вверх для "всплытия" */
+          }
+        }
+
+        @media screen and (max-width: 768px){
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          min-height: 400px;
+          padding: 0;
+        }
+        
+        .case-big__logo{
+          width: 820px;
+          height: 20px;
+          display: flex;
+          justify-content: center;
+          margin-top: 44px;
+
+          @media screen and (max-width: 768px){
+            width: 100%;
+            height: 20px;
+          }
+        }
+      }
+
+      .cases-body__case{
+        width: 400px;
+        height: 482px;
+        background-color: $color-container__bg;
+        border: 3px solid $color-main__white;
+        border-radius: $corner-radius__default;
+        overflow: hidden;
+        position: relative;
+        transition: 0.6s;
+        cursor: pointer;
+
+        @media screen and (max-width: 768px){
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          min-height: 380px;
+        }
+
+        &:hover{
+          background-color: $color-main__white;
+        }
+
+        .case__logo{
+          width: 400px;
+          height: 20px;
+          display: flex;
+          justify-content: center;
+          margin-top: 44px;
+          
+          @media screen and (max-width: 768px){
+          width: 100%;
+          height: 20px;
+        }
+        }
+      }
+
+        .case__header{
+          @extend %text-header_h2;
+          color: $color-main__dark;
+          margin-top: 24px;
+        }
+
+        .case__badges{
+          @extend %flex-horizontal__center;
+          justify-content: center;
+          gap: 4px;
+          transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0),
+            opacity 0.2s cubic-bezier(0, 0, 0.79, 0),
+            margin-bottom 0.2s cubic-bezier(0, 0, 0.79, 0);
+
+          .badge-small{
+            @extend %text-badge_small;
+            background-color: $color-badgeSmall__main;
+            padding: 8px 12px;
+            border-radius: 40000px;
+            border: 1px solid $color-badgeSmall__border;
+            margin-top: 16px;
+
+            @media screen and (max-width: 768px){
+              margin-top: 16px;
+            }
+          }
+        }
+
+      @media screen and (max-width: 768px){
+        flex-direction: column;
+        gap: clamp(8px, 2vw, 12px);
+      }
+    }
+
+    @media screen and (max-width: 768px){
+      gap: clamp(8px, 2vw, 12px);
+    } // cases line level
+  } // cases-body level
+
+}
+
+
+// Логотипы компаний в кейс-лайнах
+.tbank{
+  background-image: url('../images/logos/small/tbank-logo__small.png');
+  width: 65px;
+  height: 20px;
+  @extend %image-styles__full-container;
+
+  @media screen and (max-width: 768px){
+    background-image: url('../images/logos/small/mobile/tbank-logo__small-mobile.png');
+    width: clamp(40px, 12vw, 48px);
+    height: clamp(12px, 3.5vw, 15px);
+  }
+}
+
+.scrapp{
+  background-image: url('../images/logos/small/scrapp-logo__small.png');
+  width: 62px;
+  height: 20px;
+  @extend %image-styles__full-container;
+
+  @media screen and (max-width: 768px){
+    background-image: url('../images/logos/small/mobile/scrapp-logo__small-mobile.png');
+    width: clamp(38px, 11vw, 45px);
+    height: clamp(12px, 3.5vw, 15px);
+  }
+}
+
+.av{
+  background-image: url('../images/logos/small/av-logo__small.png');
+  width: 93px;
+  height: 20px;
+  @extend %image-styles__full-container;
+
+  @media screen and (max-width: 768px){
+    background-image: url('../images/logos/small/mobile/av-logo__small-mobile.png');
+    width: clamp(60px, 18vw, 70px);
+    height: clamp(12px, 3.5vw, 15px);
+  }
+}
+
+.antey{
+  background-image: url('../images/logos/small/antey-logo__small.png');
+  width: 147px;
+  height: 20px;
+  @extend %image-styles__full-container;
+
+  @media screen and (max-width: 768px){
+    background-image: url('../images/logos/small/mobile/antey-logo__small-mobile.png');
+    width: clamp(85px, 25vw, 103px);
+    height: clamp(11px, 3.2vw, 14px);
+  }
+}
+
+.hf {
+  background-image: url('../images/logos/small/hf-logo__small.png');
+  width: 128px;
+  height: 20px;
+  @extend %image-styles__full-container;
+
+  @media screen and (max-width: 768px){
+    background-image: url('../images/logos/small/mobile/hf-logo__small-mobile.png');
+    width: clamp(80px, 23vw, 96px);
+    height: clamp(12px, 3.5vw, 15px);
+  }
+}
+
+// Картинки и анимации для контейнеров кейсов
+.case-big__image-container{
+  width: 814px;
+  height: 254px;
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  padding-left: 25px;
+  transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0),
+    height 0.2s cubic-bezier(0, 0, 0.79, 0);
+
+  .image-container__big-image{
+    @extend %image-styles__full-container;
+    width: 236px;
+    height: 510px;
+    transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0);
+    position: relative;
+    z-index: 41;
+  }
+  .image-container__small-image{
+    @extend %image-styles__full-container;
+    width: 173px;
+    height: 357px;
+    transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0);
+    transform: translateY(32px) translateX(-25px);
+    position: relative;
+    z-index: 40;
+
+    @media screen and (max-width: 768px){
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    max-width: 100%;
+    width: 100%;
+    margin-top: clamp(20px, 5vw, 24px);
+    padding-left: 0;
+  }
+
+  // Вставочка картиночек для длинного контейнера
+  .ai-case__big{
+    background-image: url("../images/casesObjects/case-image__ai-big.png");
+  }
+  .ai-case__small{
+    background-image: url("../images/casesObjects/case-image__ai-small.png");
+  }
+  .av-case__aic-big{
+    background-image: url("../images/casesObjects/case-image__aic-big.png");
+    width: 244px;
+  }
+  .av-case__aic-small{
+    background-image: url("../images/casesObjects/case-image__aic-small.png");
+  }
+  .tbank-case__sfera-big{
+    background-image: url("../images/casesObjects/tbank-case__sfera-big.png");
+    width: 244px;
+  }
+  .tbank-case__sfera-small{
+    background-image: url("../images/casesObjects/tbank-case__sfera-small.png");
+  }
+  .antey-case__image-big{
+    background-image: url("../images/casesObjects/antey-case__image-big.png");
+    height: 512px;
+  }
+  .antey-case__image-small{
+    background-image: url("../images/casesObjects/antey-case__image-small.png");
+    height: 376px;
+  }
+}
+
+.case-small__image-container{
+  margin-top: 36px;
+  transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0),
+    height 0.2s cubic-bezier(0, 0, 0.79, 0);
+  width: 400px;
+  height: 254px;
+
+  .image-container__small-image{
+    @extend %image-styles__full-container;
+    width: 236px;
+    height: 511px;
+    margin: 0 auto;
+    transition: transform 0.2s cubic-bezier(0, 0, 0.79, 0);
+    position: relative;
+    z-index: 41;
+  }
+  // Тут тоже грузим картиночки для мелкого контейнера
+  .scrapp-case__image{
+    background-image: url("../images/casesObjects/scrapp-case__image.png");
+    height: 488px;
+  }
+  .av-case__search{
+    background-image: url("../images/casesObjects/case-image__av-search.png");
+  }
+  .tbank-case__invest{
+    background-image: url("../images/casesObjects/tbank-case__invest.png");
+  }
+  .hf-case__image{
+    background-image: url("../images/casesObjects/hf-case__image.png");
+  }
+
+  @media screen and (max-width: 768px){
+    margin-top: clamp(24px, 6vw, 32px);
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+// Анимация при ховере
+.cases-body__case-big:hover, .cases-body__case:hover{
+
+  .case__badges{
+    opacity: 0;
+    transform: translateY(10px);
+    margin-bottom: -30px;
+  }
+
+  .case-big__image-container{
+    height: 299px;
+
+    .image-container__big-image{
+      transform: rotate(-8deg);
+
+      @media screen and (max-width: 768px){
+        transform: rotate(0deg);
+      }
+    }
+    .image-container__small-image{
+      transform: translateY(32px) translateX(-25px) rotate(4deg);
+    }
+  }
+  .case-small__image-container{
+
+    .image-container__small-image{
+      transform: translateY(-30px);
+    }
+  }
+}
+// Эффектики при ховере
+.case-hover__effect{
+  @extend %image-styles__full-container;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0, 0, 0.79, 0);
+  z-index: 0;
+  position: absolute;
+}
+.cases-body__case:hover .case-hover__effect,
+.cases-body__case-big:hover .case-hover__effect,
+.cases-body__case:hover .case__hover-indicator,
+.cases-body__case-big:hover .case__hover-indicator{
+  opacity: 1;
+}
+// Вставка картинок для эффектов в плитке кейсов
+.case__scrapp-effect{
+  background-image: url("../images/casesObjects/case-scrapp__hover-effect.png");
+  width: 400px;
+  height: 400px;
+  margin-left: 84px;
+  margin-top: 132px;
+  transform: rotate(-20deg);
+}
+
+
+// Блок обо мне на главной
+.about{
+  width: 1240px;
+  max-width: 100%;
+  @extend %ident-main__blocks;
+  overflow: hidden;
+  padding-bottom: 180px;
+  
+  @media screen and (max-width: 768px){
+    width: 100%;
+    padding: 0 16px clamp(120px, 25vw, 180px) 16px;
+  }
+
+  .about-h1{
+    @extend %text-header_h1;
+    color: $color-main__dark;
+  }
+  .about-block-first{
+    margin-top: 180px;
+    transform: translateX(5%);
+
+    @media screen and (max-width: 768px){
+      margin-top: clamp(60px, 12vw, 80px);
+      margin-bottom: 0;
+      transform: translateX(0%);
+    }
+  }
+  .about__block-second{
+    margin-top: 120px;
+    margin-bottom: -80px;
+    transform: translateX(10%);
+
+    @media screen and (max-width: 768px){
+      margin-top: clamp(60px, 12vw, 80px);
+      margin-bottom: 0;
+      transform: translateX(0%);
+    }
+  }
+  .about__block-third{
+    transform: translateX(5%);
+
+    @media screen and (max-width: 768px){
+      margin-top: clamp(80px, 15vw, 120px);
+      transform: translateX(0%);
+    }
+  }
+
+  .about-block__cards{
+    display: flex;
+
+    .cards__card{
+      border-radius: $corner-radius__large;
+      border: 3px solid $color-main__white;
+      background-color: $color-container__bg;
+      box-shadow: 0 0px 24px rgba(51, 51, 51, .24);
+      @extend %image-styles__full-container;
+
+    }
+    // Вставляем разные картинки через классы
+    %cards-size-var{
+      width: 283px;
+      height: 283px;
+
+      @media screen and (max-width: 768px){
+        min-width: clamp(140px, 40vw, 160px);
+        width: clamp(140px, 40vw, 160px);
+        height: clamp(140px, 40vw, 160px);
+      }
+    }
+    .strikeball{
+      background-image: url("../images/photos/active-sport__strikeball.png");
+      margin-bottom: 24px;
+      transform: rotate(-30deg);
+      @extend %cards-size-var;
+      position: relative;
+      z-index: 9;
+    }
+    .cerling{
+      background-image: url("../images/photos/active-sport__cerling.png");
+      margin-left: -70px;
+      transform: rotate(25deg);
+      @extend %cards-size-var;
+      position: relative;
+      z-index: 8;
+    }
+    .office-mafia{
+      background-image: url("../images/photos/about-photo__office-mafia.png");
+      @extend %cards-size-var;
+      position: relative;
+      z-index: 14;
+    }
+    .winter{
+      background-image: url("../images/photos/about-photo__winter.png");
+      @extend %cards-size-var;
+      width: 200px;
+      height: 200px;
+      transform: translateX(-130%) translateY(85%) rotate(20deg);
+      position: relative;
+      z-index: 15;
+
+      @media screen and (max-width: 768px){
+        min-height: clamp(100px, 30vw, 120px);
+        min-width: clamp(100px, 30vw, 120px);
+        width: clamp(100px, 30vw, 120px);
+        height: clamp(100px, 30vw, 120px);
+      }
+    }
+    .me{
+      background-image: url("../images/photos/about-photo__me.png");
+      @extend %cards-size-var;
+      width: 200px;
+      height: 200px;
+      transform: translateX(-140%) translateY(100%) rotate(-30deg);
+      position: relative;
+      z-index: 16;
+
+      @media screen and (max-width: 768px){
+        min-height: clamp(100px, 30vw, 120px);
+        min-width: clamp(100px, 30vw, 120px);
+        width: clamp(100px, 30vw, 120px);
+        height: clamp(100px, 30vw, 120px);
+      }
+    }
+    .cards__smile-misc{
+      @extend %image-styles__full-container;
+      width: 45px;
+      height: 45px;
+      background-image: url("../images/miscs/smile-misc.png");
+      transform: translateX(-825%) translateY(220%) rotate(25deg);
+    }
+    .perch{
+      background-image: url("../images/photos/pin-cloths__perch.png");
+      @extend %cards-size-var;
+      position: relative;
+      z-index: 11;
+      transform: translateX(30%) rotate(-28deg);
+    }
+    .shlem{
+      background-image: url("../images/photos/pin-cloths__shlem.png");
+      width: 180px;
+      height: 180px;
+      position: relative;
+      z-index: 12;
+      transform: translateX(-210%) translateY(140%) rotate(4deg);
+
+      @media screen and (max-width: 768px){
+        min-height: clamp(85px, 25vw, 100px);
+        min-width: clamp(85px, 25vw, 100px);
+        width: clamp(85px, 25vw, 100px);
+        height: clamp(85px, 25vw, 100px);
+      }
+    }
+    .tishka{
+      background-image: url("../images/photos/pin-cloths__tishka.png");
+      @extend %cards-size-var;
+      position: relative;
+      z-index: 10;
+      transform: translateY(37%) rotate(30deg);
+    }
+
+    @media screen and (max-width: 768px){
+      justify-content: center;
+    }
+  }
+  // Адаптивное размещение карточек на экранах
+  #cards-block__second{
+      justify-content: flex-end;
+
+      @media screen and (max-width: 768px){
+      justify-content: center;
+      padding-left: clamp(30px, 8vw, 50px);
+      }
+    }
+  #cards-block__third{
+    @media screen and (max-width: 768px){
+      justify-content: center;
+      padding-left: clamp(100px, 25vw, 200px);
+      }
+  }
+
+  .about-block__comment{
+    display: flex;
+    margin-top: 32px;
+    overflow: visible;
+    min-height: auto;
+
+    .comment__misc{
+      @extend %image-styles__full-container;
+    }
+    
+    //Вставляем стрелочки и толкаем их
+    .first{
+      background-image: url("../images/miscs/arrow-misc__first.png");
+      width: 211px;
+      height: 87px;
+      margin-left: 326px;
+
+      @media screen and (max-width: 768px){
+        margin-left: clamp(50px, 12vw, 76px);
+        margin-top: clamp(8px, 2vw, 12px);
+        width: clamp(120px, 30vw, 142px);
+        height: clamp(48px, 12vw, 58px);
+        transform: rotate(9deg);
+      }
+    }
+    .second{
+      background-image: url("../images/miscs/arrow-misc__second.png");
+      width: 158px;
+      height: 143px;
+      transform: translateX(250%) translateY(-150%);
+
+      @media screen and (max-width: 768px){
+        width: clamp(110px, 28vw, 132px);
+        height: clamp(100px, 25vw, 120px);
+        background-image: url("../images/miscs/arrow-misc__second-mobile.png");
+        transform: translateY(30%) translateX(5%) rotate(126deg);
+      }
+    }
+    .third{
+      background-image: url("../images/miscs/arrow-misc__third.png");
+      width: 83px;
+      height: 36px;
+      transform: translateY(-350%) translateX(550%);
+
+      @media screen and (max-width: 768px){
+        transform: translateY(280%) translateX(200%) rotate(42deg);
+      }
+    }
+
+    .comment__text{
+      @extend %text-main__medium;
+      color: $color-main__dark;
+      overflow: visible;
+      word-wrap: break-word;
+      line-height: 1.5;
+    }
+    // Толкаем текст
+    #comment-first{
+      margin-left: 24px;
+      margin-top: 42px;
+
+      @media screen and (max-width: 768px){
+        text-align: center;
+        margin-top: clamp(16px, 4vw, 24px); 
+      }
+    }
+    #comment-second{
+      transform: translateY(-215%) translateX(-20%);
+
+      @media screen and (max-width: 768px){
+        text-align: center;
+        margin-top: clamp(16px, 4vw, 24px); 
+        transform: translateY(100%) translateX(0%);
+      }
+    }
+    #comment-third{
+      transform: translateY(-95%) translateX(90%);  
+      overflow: visible;
+      word-wrap: break-word;
+
+      @media screen and (max-width: 768px){
+        text-align: center;
+        transform: translateY(170%) translateX(0%);
+        margin-bottom: clamp(16px, 4vw, 24px);
+        padding-bottom: clamp(8px, 2vw, 16px);
+      }
+    }
+
+    @media screen and (max-width: 768px){
+      display: inline;
+    }
+  }
+
+}
+
+
+// Стили для блока со скиллами
+
+.skills{
+  width: 1240px;
+  max-width: 100%;
+  margin-top: 0px;
+  
+  @media screen and (max-width: 768px){
+    width: 100%;
+    padding: 0 16px;
+    margin-top: clamp(120px, 20vw, 160px);
+  }
+
+  &__header-block{
+    width: 1240px;
+    max-width: 100%;
+
+    .skills__h1{
+      @extend %text-header_h1;
+      color: $color-main__dark;
+      text-align: left;
+      margin-top: 80px;
+    }
+    .skills__subtitle{
+      @extend %text-main__medium;
+      color: $color-main__grey;
+      margin-top: 24px;
+
+      @media screen and (max-width: 768px){
+        margin-top: clamp(12px, 3vw, 16px);
+      }
+    }
+  }
+
+  &__body{
+      margin-top: 104px;
+      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      
+
+      .skills__body-line{
+        display: flex;
+        @extend %flex-horizontal__center;
+        gap: 20px;
+
+        .body-line__card{
+          width: 400px;
+          height: 482px;
+          background-color: $color-container__bg;
+          border: 3px solid $color-main__white;
+          border-radius: $corner-radius__default;
+          padding: 40px 36px;
+          transition: background-color 0.6s ease;
+
+          &:hover{
+            background-color: $color-main__white;
+          }
+
+          @media screen and (max-width: 768px){
+            min-width: clamp(240px, 65vw, 268px);
+            max-height: none;
+            height: auto;
+            padding: clamp(20px, 5vw, 24px) 0;
+          }
+        }
+        .skills-card__big{
+          width: 820px;
+          padding: 40px 36px;
+
+          &:hover{
+            background-color: $color-main__white;
+          }
+
+          @media screen and (max-width: 768px){
+            width: 100%;
+            max-width: 100%;
+            min-height: auto;
+            padding: clamp(24px, 6vw, 32px) clamp(24px, 6vw, 40px);
+          }
+        }
+
+        @media screen and (max-width: 768px){
+          gap: clamp(6px, 1.5vw, 8px);
+          position: relative;
+          overflow-x: auto;           /* Разрешаем горизонтальную прокрутку */
+          scroll-behavior: smooth;    /* Плавный скролл */
+          -webkit-overflow-scrolling: touch;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          overflow-y: hidden;
+
+          &::-webkit-scrollbar{
+            display: none;
+          }
+        }
+      }
+    }
+  
+}
+
+// Наполнение карточек
+.card__skill-image{
+  @extend %image-styles__full-container;
+  width: 328px;
+  height: 303px;
+  margin-bottom: 11px;
+
+  @media screen and (max-width: 768px){
+    width: clamp(180px, 50vw, 220px);
+    height: clamp(120px, 35vw, 150px);
+    margin: 0 auto clamp(10px, 2.5vw, 13px) auto;
+  }
+}
+.card__skill-text{
+  @extend %text-main__regular;
+  color: $color-main__dark;
+
+  @media screen and (max-width: 768px){
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+.card__skill-title{
+  @extend %text-main__medium;
+  color: $color-main__dark;
+  margin-top: 7px;
+  margin-bottom: 16px;
+
+  @media screen and (max-width: 768px){
+    margin-bottom: clamp(10px, 2.5vw, 12px);
+    text-align: center;
+  }
+}
+//Вставляем картинки в контейнеры со скиллами
+.skill-develop{
+  background-image: url("../images/illustrations/skill-image__code.png");
+
+  @media screen and (max-width: 768px){
+    background-image: url("../images/illustrations/mobile_skill-image__code.png");
+  }
+}
+.skill-plus{
+  background-image: url("../images/illustrations/skill-image__plus.png");
+
+  @media screen and (max-width: 768px){
+    background-image: url("../images/illustrations/mobile-skill-image__plus.png");
+    width: clamp(180px, 50vw, 220px);
+    height: clamp(120px, 35vw, 150px);
+  }
+}
+.skill-minus{
+  background-image: url("../images/illustrations/skill-image__minus.png");
+
+  @media screen and (max-width: 768px){
+    background-image: url("../images/illustrations/mobile-skill-image__minus.png");
+    width: clamp(180px, 50vw, 220px);
+    height: clamp(120px, 35vw, 150px);
+  }
+}
+.skill-motivation{
+  background-image: url("../images/illustrations/skill-image__win.png");
+
+  @media screen and (max-width: 768px){
+    background-image: url("../images/illustrations/mobile-skill-image__win.png");
+    width: clamp(180px, 50vw, 220px);
+    height: clamp(120px, 35vw, 150px);
+  }
+}
+.skill-dd{
+  background-image: url("../images/illustrations/skill-image__dd.png");
+  width: 748px;
+
+  @media screen and (max-width: 768px){
+    width: clamp(240px, 65vw, 277px);
+    height: clamp(110px, 30vw, 138px);
+    background-image: url("../images/illustrations/mobile-skill-image__dd.png");
+    margin-bottom: clamp(16px, 4vw, 20px);
+  }
+}
+
+
+// FAQ
+
+.faq{
+  opacity: 1;
+  transform: translateY(0);
+  //
+  @extend %ident-main__blocks;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.6s ease;
+
+  &__h1{
+    @extend %text-header_h1;
+    color: $color-main__dark;
+  }
+  &__subtitle{
+    @extend %text-main__medium;
+    color: $color-main__grey;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 104px;
+
+    @media screen and (max-width: 768px){
+      margin-bottom: clamp(32px, 8vw, 44px);
+      margin-top: clamp(12px, 3vw, 16px);
+    }
+  }
+
+  &__item {
+    border-bottom: 3px solid $color-main__white;
+    padding: 36px 30px;
+    background-color: $color-container__bg;
+    cursor: pointer;
+    max-width: 803px;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: $corner-radius__default;
+
+    &.faq-opened {
+      .faq__icon {
+        transform: rotate(180deg);
+      }
+      .faq__answer{
+        padding-top: 24px;
+
+        @media screen and (max-width: 768px){
+          padding-top: clamp(10px, 2.5vw, 12px);
+        }
+      }
+      .faq__title{
+        color: $color-main__dark;
+      }
+    }
+    
+    &:hover{
+      background-color: $color-main__white;
+
+      .faq__question{
+
+        .faq__title{
+          color: $color-main__dark;
+        }
+      }
+      .faq__icon{
+
+        background-image: url(../images/miscs/faq__item-icon_hover.png);
+      }
+    }
+  }
+
+  &__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    @extend %text-main__medium;
+    color: $color-main__grey;
+    transition: 0.5s;
+  }
+  &__icon {
+    transition: transform 0.3s ease;
+    width: 24px;
+    height: 24px;
+    @extend %image-styles__full-container;
+    background-image: url(../images/miscs/faq__item-icon.png);
+  }
+  &__answer {
+    height: 0;
+    padding-top: 0;
+    overflow: hidden;
+    transition: height 0.4s ease, padding-top 0.3s ease;
+    color: $color-main__dark;
+    @extend %text-main__regular;
+  }
+
+  @media screen and (max-width: 768px){
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+
+// Footer
+
+footer{
+  margin-top: 80px;
+  margin-bottom: 64px;
+  max-width: 100%;
+
+  .footer-text{
+    @extend %text-main__regular;
+    color: $color-main__grey;
+    
+    @media screen and (max-width: 768px){
+      text-align: center;
+    }
+  }
+  .nets-line{
+    display: flex;
+    justify-content: center;  /* центр по горизонтали */
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+
+    .nets-item{
+      background-color: $color-container__bg;
+      border: 2px solid $color-main__white;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.6s;
+
+      .nets-item__icon{
+        @extend %image-styles__full-container;
+      }
+    }
+
+    // Разные ховеры и иконки на айтемы
+    .hover-tg{
+      .telegram{
+        background-image: url('../images/miscs/misc-nets__tg.png');
+        width: 20px;
+        height: 17px;
+        margin: 12px 9px;
+      }
+      &:hover, &:active{
+        background-color: #34AADF;
+        border: 2px solid #52B8E6;
+
+        .telegram{
+          background-image: url('../images/miscs/misc-nets__tg-hover.png');
+        }
+      }
+    }
+    .hover-pin{
+      .pinterest{
+        background-image: url('../images/miscs/misc-nets__pin.png');
+        width: 15px;
+        height: 20px;
+        margin: 11px auto;
+      }
+      &:hover, &:active{
+        background-color: #FE0000;
+        border: 2px solid #FE3131;
+
+        .pinterest{
+          background-image: url('../images/miscs/misc-nets__pin-hover.png');
+        }
+      }
+    }
+    .hover-be{
+      .behance{
+        background-image: url('../images/miscs/misc-nets__be.png');
+        width: 22px;
+        height: 14px;
+        margin: 13px auto;
+      }
+      &:hover, &:active{
+        background-color: #111111;
+        border: 2px solid #202020;
+
+        .behance{
+          background-image: url('../images/miscs/misc-nets__be-hover.png');
+        }
+      }
+    }
+    .hover-drib{
+      .dribble{
+        background-image: url('../images/miscs/misc-nets__drib.png');
+        width: 22px;
+        height: 22px;
+        margin: 9px auto;
+      }
+      &:hover, &:active{
+        background-color: #E64D89;
+        border: 2px solid #ED6298;
+
+        .dribble{
+          background-image: url('../images/miscs/misc-nets__drib-hover.png');
+        }
+      }
+    }
+
+  }
+}
+
+// Легаси стили для контента в самом большом контейнере
+.big-metrics__container{
+  margin-top: 100px;
+  margin-left: 70px;
+  @media screen and (max-width: 768px){
+    display: none;
+  }
+}
+.big-metrics__subtitle{
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+    color: #333333;
+}
+.big-metrics__title{
+    padding-top: 6px;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.08px;
+    color: #333333;
+}
+.big-metrics__line{
+    width: 1075px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+.big-background__effect{
+    position: absolute;
+    z-index: 1;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 390px;
+    font-weight: 800;
+    letter-spacing: -16px;
+    color: #F8F8F8;
+    margin-top: -60px;
+    // Оптимизация производительности
+    will-change: transform;
+    transform: translateZ(0);
+}
+.metrics-line__second{
+    margin-top: 360px;
+}
+.big-metrics__lineEffect{
+    width: 656px;
+    height: 20px;
+    background-image: url('../images/miscs/target-line.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}
+.big-background__image{
+    width: 176px;
+    height: 176px;
+    position: absolute;
+    z-index: 3;
+    margin-left: 750px;
+    margin-top: 194px;
+    background-image: url('../images/miscs/melon.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}
+.big-background__handImage{
+    width: 472px;
+    height: 677px;
+    position: absolute;
+    z-index: 3;
+    margin-left: 376px;
+    margin-top: -143px;
+    background-image: url('../images/casesObjects/super-case__image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}
+// Конец легаси стилей
